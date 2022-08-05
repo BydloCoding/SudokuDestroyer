@@ -11,7 +11,6 @@ import colors
 user32 = ctypes.windll.user32
 screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 
-
 def GetWindowRectFromName(name: str) -> tuple:
     hwnd = ctypes.windll.user32.FindWindowW(0, name)
     rect = ctypes.wintypes.RECT()
@@ -158,7 +157,6 @@ class GameManager(object):
                 y = gridY + stepSizeY * stepY
                 crop = self.game_area.crop(
                     (x, y, x + stepSizeX, y + stepSizeY))
-                crop.save("1.png")
                 for digit in range(0, 9):
                     loc = pyautogui.locate(
                         self.imgs[digit], crop, grayscale=True, confidence=0.9)
@@ -187,7 +185,6 @@ class GameManager(object):
             restored = matrix[position[0]][position[1]]
             if restored and (loc := buttons.get(restored)):
                 pyautogui.click(loc)
-
         self.run_post_actions()
 
     def locate_and_click(self, image, **kwargs):
